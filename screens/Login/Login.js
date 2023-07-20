@@ -20,7 +20,7 @@ const Login = ({ navigation }) => {
         axios.post('http://127.0.0.1:8000/api/users/login', loginObject)
             .then(function (response) {
                 console.log(response.data.payload);
-                //AsyncStorage.setItem('user', JSON.stringify(response.data.user));
+                AsyncStorage.setItem('user', JSON.stringify(response.data.payload));
             })
             .catch(function (error) {
                 console.log(error);
