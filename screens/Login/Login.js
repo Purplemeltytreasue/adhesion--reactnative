@@ -4,7 +4,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const Login = () => {
+const Login = ({ navigation }) => {
     const [username, setusername] = useState('')
     const [password, setpassword] = useState('')
 
@@ -19,8 +19,8 @@ const Login = () => {
         // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
         axios.post('http://127.0.0.1:8000/api/users/login', loginObject)
             .then(function (response) {
-                console.log(response.data.user);
-                AsyncStorage.setItem('user', JSON.stringify(response.data.user));
+                console.log(response.data.payload);
+                //AsyncStorage.setItem('user', JSON.stringify(response.data.user));
             })
             .catch(function (error) {
                 console.log(error);

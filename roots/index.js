@@ -13,9 +13,11 @@ const getIsSignedIn = () => {
   // custom logic
   const value =  AsyncStorage.getItem('user');
   //AsyncStorage.removeItem('user');
-  if (AsyncStorage.getItem('user') == null) {
+  if (AsyncStorage.getItem('user')?._k == null) {
     return false;
-  } else {
+  } else if (AsyncStorage.getItem('user')?.id>0) {
+    return true;
+  } else{
     return true;
   }
 
@@ -34,14 +36,15 @@ const Routes = () => {
       <Stack.Navigator
         screenOptions={{ headerShown: false }}>
         {isSignedIn == false ? (
-          <>
+              <Stack.Group>
+
             <Stack.Screen name="Login" component={Login} />
-          </>
+          </Stack.Group>
         ) : (
-          <>
-            <Stack.Screen name="home" component={BottomTabs} />
+          <Stack.Group>
+            <Stack.Screen name="Home" component={BottomTabs} />
             <Stack.Screen name="SignUp" component={BottomTabs} />
-          </>
+          </Stack.Group>
         )}
       </Stack.Navigator>
     </NavigationContainer>
