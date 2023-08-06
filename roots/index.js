@@ -3,9 +3,14 @@ import React, { useState, useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BottomTabs from '../screens/tabs';
-import Signup from "../screens/Signup/Signup";
-import Login from "../screens/Login/Login";
+import Signup from "../screens/Signup";
+import Login from "../screens/Login";
+import Home from '../screens/Home';
+import Settings from '../screens/Settings';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import profileScreen from '../screens/profileScreen';
+import About from '../screens/about';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,27 +30,15 @@ const getIsSignedIn = () => {
 
 const Routes = () => {
   const [isSignedIn, setisSignedIn] = useState(getIsSignedIn())
-  useEffect(() => {
-
-    return () => {
-
-    }
-  }, [isSignedIn])
   return (
     <NavigationContainer >
       <Stack.Navigator
-        screenOptions={{ headerShown: false }}>
-        {isSignedIn == false ? (
-              <Stack.Group>
-
+        screenOptions={{ headerShown: false }}> 
             <Stack.Screen name="Login" component={Login} />
-          </Stack.Group>
-        ) : (
-          <Stack.Group>
+            <Stack.Screen name="SignUp" component={Signup} />    
             <Stack.Screen name="Home" component={BottomTabs} />
-            <Stack.Screen name="SignUp" component={BottomTabs} />
-          </Stack.Group>
-        )}
+            <Stack.Screen name="about" component={BottomTabs} />
+            <Stack.Screen name="profileScreen" component={BottomTabs} />
       </Stack.Navigator>
     </NavigationContainer>
   )

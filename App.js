@@ -1,11 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import Routes from './roots'
+import { NativeBaseProvider } from "native-base" ;
 const App = () => {
   return (
-    <View style={{flex:1}}>
+    <NativeBaseProvider isSSR>
       <Routes/>
-    </View>
+    </NativeBaseProvider>
   )
 }
 
