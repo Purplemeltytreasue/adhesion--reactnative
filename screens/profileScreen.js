@@ -1,12 +1,16 @@
 import { fonts } from '@rneui/base';
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image,Alert } from 'react-native';
 import { Avatar} from 'react-native-paper';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { Button, Center, VStack, Box, Heading, FormControl, Input, } from "native-base";
 import { useRoute } from '@react-navigation/native';
+import { ScrollView } from 'react-native';
+import Home from './Home';
+
+
 
 const ProfileScreen = () => {
 
@@ -24,6 +28,7 @@ const ProfileScreen = () => {
     }
   };
   const [username, setusername] = useState('')
+  const [numeroadhesion, setnumeroadhesion] = useState('')
   const [firstname, setfirstname] = useState('')
   const [lastname, setlastname] = useState('')
   const [email, setemail] = useState('')
@@ -31,34 +36,43 @@ const ProfileScreen = () => {
   const [phonenumber, setphonenumber] = useState('')
   const [city, setcity] = useState('')
   const route = useRoute();
+  const navigation = useNavigation()
 
-  const userinfo = ({}) => {
+  const adhesion_inscription = () => {
     //this.getData();
 
-    var user = {
-      id:0,
+    var Adhesionuser = {
+      
       username: username,
-      lastname: lastname,
-      firstname: firstname,
+      n_adhesion  : numeroadhesion,
+      lastName: lastname,
+      firsName: firstname,
       email: email,
       password: password,
-      phonenumber: phonenumber,
+      phoneNumber: phonenumber,
       city: city
     };
-    /*axios.post('http://127.0.0.1:8000/api/users/update', user)
+  axios.post('http://127.0.0.1:8000/api/adhesions/create', Adhesionuser)
     .then((response) => {
           console.log(response.status);
           console.log(response.data.payload);
+          if (response.status == 200) {
+            console.log(response.data.payload);
+            Alert.alert('Info', 'youre becoming a number ', [
+            { text: ' UNDERSTOOD', onPress: () => console.log(" compte cree ") }
+            ])
+            navigation.navigate('home');
+          }
           //AsyncStorage.setItem('user', JSON.stringify(response.data.payload));
           // navigation.replace('Home')
     })
     .catch(function (error) {
         console.log(error);
-    });*/
+    });
   };
   
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Profile</Text>
       </View>
@@ -71,45 +85,52 @@ const ProfileScreen = () => {
 
       </View>
       <Heading h={5} ml={6} mt={6}  size={"md"} fontWeight="600" color="coolGray.800" _dark={{ color: "warmGray.50", }} _text={{ color: "indigo.300" }}>
-        User Informations
+       integrate to our activities
       </Heading>
 
       <View w="100%" style ={styles.formcontainer}>
         <VStack space={1}>
           <Box safeArea p="1" py="3" w="90%" maxW="290">
             <VStack space={1} >
+            <FormControl>
+                <FormControl.Label _text={{ fontSize: 14 }}>Username </FormControl.Label>
+                <Input w={'230'} size={"lg"} onChangeText={setusername} value={username} />
+              </FormControl>
+              <FormControl>
+                <FormControl.Label _text={{ fontSize: 14 }}>Numero adhesion </FormControl.Label>
+                <Input w={'230'} size={"lg"} onChangeText={setnumeroadhesion} value={numeroadhesion} />
+              </FormControl>
               <FormControl>
                 <FormControl.Label _text={{ fontSize: 14 }}>Last name</FormControl.Label>
-                <Input w={'230'} size={"lg"} onChangeText={value => setlastname(value)} editable={false} value={lastname} />
+                <Input w={'230'} size={"lg"} onChangeText={setlastname}  value={lastname} />
               </FormControl>
               <FormControl>
                 <FormControl.Label _text={{ fontSize: 14 }}>First name </FormControl.Label>
-                <Input w={'230'} size={"lg"} onChangeText={value => setfirstname(value)} editable={false} value={firstname} />
+                <Input w={'230'} size={"lg"} onChangeText={setfirstname}  value={firstname} />
               </FormControl>
               <FormControl>
                 <FormControl.Label _text={{ fontSize: 14 }}>E-mail</FormControl.Label>
-                <Input w={'230'} size={"lg"} keyboardType="email-address" onChangeText={value => setemail(value)} editable={false} value={email} />
+                <Input w={'230'} size={"lg"} keyboardType="email-address" onChangeText={setemail}  value={email} />
               </FormControl>
               <FormControl>
                 <FormControl.Label _text={{ fontSize: 14 }}>Password</FormControl.Label>
-                <Input w={'230'} size={"lg"} type="password" onChangeText={value => setpassword(value)} editable={false} secureTextEntry={true} value={password} />
+                <Input w={'230'} size={"lg"} type="password" onChangeText={setpassword}  secureTextEntry={true} value={password} />
               </FormControl>
               <FormControl>
                 <FormControl.Label _text={{ fontSize: 14 }}>Phone number</FormControl.Label>
-                <Input w={'230'} size={"lg"} onChangeText={value => setphonenumber(value)} editable={false} value={phonenumber} keyboardType="phone-pad" />
-              </FormControl>
-              <FormControl>
-                <FormControl.Label _text={{ fontSize: 14 }} >City</FormControl.Label>
-                <Input w={'230'} size={"lg"} onChangeText={value => setcity(value)} editable={false} value={city} />
-              </FormControl>
+                <Input w={'230'} size={"lg"} onChangeText={setphonenumber}  value={phonenumber} keyboardType="phone-pad" />
+              </FormControl> 
             </VStack>
-            <Button w={'230'} onPress={() => userinfo()} size={"lg"} my={3} colorScheme={"indigo"} _text={{ color: "white", fontSize: 20, fontWeight: "bold", }} >Save Changes</Button>
+            <View >
+            <Button w={'230'} onPress={() => adhesion_inscription()} size={"lg"} my={3} colorScheme={"indigo"} _text={{ color: "white", fontSize: 20, fontWeight: "bold", }} > Become a number </Button>
+            
+            </View>
           </Box>
         </VStack>
       </View>
 
 
-    </View >
+    </ScrollView >
   );
 };
 

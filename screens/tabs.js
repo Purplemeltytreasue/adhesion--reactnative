@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Home from './Home';
-import Settings from './Settings';
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -14,7 +14,7 @@ const Tab = createMaterialBottomTabNavigator();
 const BottomTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="profilescreen"
+      initialRouteName="tabs_home"
       screenOptions={{
         tabBarActiveTintColor: '#e91e63',
         headerShown:false
@@ -34,7 +34,7 @@ const BottomTabs = () => {
           name="profilescreen"
           component={ProfileScreen}
           ptions={{
-            tabBarLabel: 'Home',
+            tabBarLabel: 'Profile',
             tabBarIcon: ({ color, size }) => (
               <Icon name='account-setting' color={color} size={size} /> 
             ),

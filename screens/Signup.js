@@ -14,9 +14,6 @@ const Signup = ({ }) => {
   const [phonenumber, setphonenumber] = useState('')
   const [city, setcity] = useState('')
 
-  const navigation = useNavigation();
-
-
   const signup = () => {
     var inscriptionObject = {
       username: username,
@@ -63,10 +60,11 @@ const Signup = ({ }) => {
   })
 
   return (
+    <ScrollView >
     <Center w="100%">
       <Image  width={200} resizeMode='cover' borderRadius={10}   source={require('/Users/simo/reactnative/p1/AwesomeProject/assets/imgbook.png')} />
       <VStack space={3}>
-        <ScrollView >
+        
           <Box   m={1} mb={10} w="90%" maxW="290">
           <Heading size={"md"} fontWeight="600" color="coolGray.800" _dark={{ color: "warmGray.50", }} _text={{color : "indigo.300"}}>
             Enter Your Informations
@@ -103,10 +101,10 @@ const Signup = ({ }) => {
           </VStack>
           <Button onPress={() => signup()} size={"lg"} my={3} colorScheme={"indigo"} _text={{ color: "white", fontSize: 20, fontWeight: "bold", }} >SignUp</Button>
         </Box>
-        </ScrollView>
-        
+
       </VStack>
     </Center>
+    </ScrollView>
   )
 }
 

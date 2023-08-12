@@ -7,8 +7,7 @@ import Home from './Home';
 import { Image, Button, Center, VStack, Box, Heading, FormControl, Input, } from "native-base";
 
 
-const Login = () => {
-    const navigation = useNavigation();
+const Login = ({navigation}) => {
     const [username, setusername] = useState('')
     const [password, setpassword] = useState('')
 
@@ -19,6 +18,8 @@ const Login = () => {
             username: username,
             password: password,
         };
+        
+
         //   axios.defaults.baseURL = 'http://127.0.0.1:8000/api';
         // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
         // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -28,11 +29,8 @@ const Login = () => {
                     console.log(response.status);
                     console.log(response.data.payload);
                     AsyncStorage.setItem('user', JSON.stringify(response.data.payload.user));
-                    // navigation.replace('Home');
-                    navigation.navigate('profileScreen',{
-                        name: 'jjjjj',
-                        mobile: 'hhhh',
-                    });
+                    navigation.navigate('home');
+                
                     // console.log('user',AsyncStorage.getItem('user'));
 
                 }

@@ -1,4 +1,5 @@
-import { View,StyleSheet,Button, ImageBackground} from 'react-native'
+import { View,ScrollView,StyleSheet,ImageBackground} from 'react-native'
+import { Button } from 'native-base';
 import { Image } from 'native-base';
 import {Text} from 'native-base';
 import React from 'react'
@@ -10,10 +11,9 @@ const Home = ({navigation}) => {
     console.log(AsyncStorage.getItem('user')._k);
 };
   return (
-    <View style={{
+    <ScrollView style={{
         flex:1,
-        alignItems:'center',
-        justifyContent:'center'
+ 
         }}>
       
       <Image  width={400} resizeMode='cover' borderRadius={10} marginTop='1%' marginBottom='1%' source={require('/Users/simo/reactnative/p1/AwesomeProject/assets/imgbook.png')} />
@@ -21,14 +21,9 @@ const Home = ({navigation}) => {
       formation est une institution sociale marocaine dotée d'un statut public à but non lucratif, d'une personnalité morale et d'une indépendance financière, et est classée parmi les institutions et entreprises publiques stratégiques au Maroc. La création de l'institution a été annoncée le jour du Trône, dans le discours du Trône en juillet 2000,et sous réserve de la loi organisationnelle 73.00 publiée le 11 Jumada al-Awwal 1422 correspondant au 1er août 2001. L'entreprise sociale est basée dans la capitale Rabat. Le roi Mohammed VI supervise l'institution, et sa gouvernance est supervisée par l'actuel président Youssef Al-Baqali, en plus du comité de direction. 
       </Text>
 
-      <Button
+      <Button onPress={()=> navigation.navigate('logout')} size={"md"} _text={{ color: "indigo.500", fontSize: 20, fontWeight: "bold" }} variant={"outline"}>Log out</Button>
 
-          onPress={()=> navigation.navigate('Login')}
-          title="LOG OUT"
-          color="#007AFF"
-          accessibilityLabel="Learn more about this purple button"
-          />
-    </View>
+    </ScrollView>
   )
 }
 const styles = StyleSheet.create({
